@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: product-search-service
+  profiles:
+    active: dev
+
+app:
+  gcs:
+    bucket: ${GCS_BUCKET:my-keywords-bucket}
+    file: ${GCS_FILE:keywords.txt}
+  graphql:
+    url: ${GRAPHQL_URL:https://your-api/graphql}
+    rateLimitPerSec: ${GRAPHQL_RATE_LIMIT:10}
+    headers:
+      authorization: ${GRAPHQL_AUTH_TOKEN:}
+  bigquery:
+    dataset: ${BIGQUERY_DATASET:product_data}
+    table: ${BIGQUERY_TABLE:product_search_results}
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always 
